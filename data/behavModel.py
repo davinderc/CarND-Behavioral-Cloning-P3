@@ -23,6 +23,10 @@ for line in lines:
         b = 0
     if center_image is not None:
         c_images.append(center_image)
+#########
+# Must check dataset, since files are missing!!! This causes array size errors!!!
+#########
+
     print(np.array(c_images).shape)
     measurement = float(line[3])
     measurements.append(measurement)
