@@ -2,7 +2,7 @@ import csv
 import cv2
 import numpy as np
 from keras.models import Sequential
-from keras.layers import Flatten, Dense, Lambda, Cropping2D
+from keras.layers import Flatten, Dense, Lambda, Cropping2D, Dropout
 from keras.layers.convolutional import Convolution2D
 from keras.layers.pooling import MaxPooling2D
 
@@ -34,15 +34,15 @@ for line in lines:
 
     if center_image is not None: # Create dataset using images/steering angles
         c_images.append(center_image)
-        measurement = float(line[3])*1.25
+        measurement = float(line[3])*1.35
         measurements.append(measurement)
     if left_image is not None:
         c_images.append(left_image)
-        measurement = float(line[3]) + 0.3
+        measurement = float(line[3]) + 0.25
         measurements.append(measurement)
     if right_image is not None:
         c_images.append(right_image)
-        measurement = float(line[3]) - 0.3
+        measurement = float(line[3]) - 0.25
         measurements.append(measurement)
 
 # Numpy arrays for training data
@@ -59,10 +59,11 @@ model.add(MaxPooling2D(pool_size=(3,3), border_mode='valid'))
 model.add(Convolution2D(15,5,5, border_mode='valid',activation='relu'))
 model.add(MaxPooling2D(pool_size=(3,3), border_mode='valid'))
 model.add(Dense(100))
+model.add(Dropout(0.65))
 model.add(Flatten())
 model.add(Dense(1))
 
 model.compile(loss='mae', optimizer='adam')
-model.fit(X_train, y_train, validation_split=0.2, shuffle=True, nb_epoch=30)
+model.fit(X_train, y_train, validation_split=0.2, shuffle=True, nb_epoch=7)
 
 model.save('model.h5')
