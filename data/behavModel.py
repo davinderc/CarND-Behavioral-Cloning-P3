@@ -16,33 +16,38 @@ b = 1
 c_images = []
 measurements = []
 for line in lines:
-    source_path_center = line[0] # Center image paths
-    center_filename = source_path_center.split('/')[-1]
-    center_path = '../very_short/IMG/' + center_filename
-    center_image = cv2.imread(center_path) # Read in center images
-    if b == 1:
-        #print(center_image)
-        b = 0
-    if center_image is not None:
+    source_path_center = line[0] # Image paths
+    source_path_left = line[1]
+    source_path_right = line[2]
+
+    center_filename = source_path_center.split('/')[-1] # Image filenames
+    left_filename = source_path_left.split('/')[-1]
+    right_filename = source_path_right.split('/')[-1]
+
+    center_path = '../very_short/IMG/' + center_filename # Updated pathnames
+    left_path = '../very_short/IMG/' + left_filename
+    right_path = '../very_short/IMG/' + right_filename
+
+    center_image = cv2.imread(center_path) # Read in images
+    left_image = cv2.imread(left_path)
+    right_image = cv2.imread(right_image)
+
+    if center_image is not None: # Create dataset using images/steering angles
         c_images.append(center_image)
         measurement = float(line[3])
         measurements.append(measurement)
-#########
-# Must check dataset, since files are missing!!! This causes array size errors!!!
-#########
+    if left_image is not None:
+        c_images.append(left_image)
+        measurement = float(line[3]) + 0.2
+        measurements.append(measurement)
+    if right_image is not None:
+        c_images.append(right_image)
+        measurement = float(line[3]) - 0.2
+        measurements.append(measurement)
 
-   # print(np.array(c_images).shape)
-
-#print(len(measurements))
 # Numpy arrays for training data
 X_train = np.array(c_images)
 y_train = np.array(measurements)
-
-#print(len(c_images[0]))
-#print(X_train.shape)
-#test = X_train.reshape((1,102))
-#print(X_train.shape)
-#print(y_train.shape)
 
 # Basic Keras model
 
