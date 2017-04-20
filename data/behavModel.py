@@ -30,7 +30,7 @@ for line in lines:
 
     center_image = cv2.imread(center_path) # Read in images
     left_image = cv2.imread(left_path)
-    right_image = cv2.imread(right_image)
+    right_image = cv2.imread(right_path)
 
     if center_image is not None: # Create dataset using images/steering angles
         c_images.append(center_image)
