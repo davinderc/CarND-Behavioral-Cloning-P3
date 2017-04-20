@@ -34,15 +34,15 @@ for line in lines:
 
     if center_image is not None: # Create dataset using images/steering angles
         c_images.append(center_image)
-        measurement = float(line[3])
+        measurement = float(line[3])*1.25
         measurements.append(measurement)
     if left_image is not None:
         c_images.append(left_image)
-        measurement = float(line[3]) + 0.2
+        measurement = float(line[3]) + 0.3
         measurements.append(measurement)
     if right_image is not None:
         c_images.append(right_image)
-        measurement = float(line[3]) - 0.2
+        measurement = float(line[3]) - 0.3
         measurements.append(measurement)
 
 # Numpy arrays for training data
