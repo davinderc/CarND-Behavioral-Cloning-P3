@@ -92,7 +92,7 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 
 ###### 2. Final Model Architecture
 
-The final model architecture (model.py lines 55-65) consisted of a convolution neural network with the following layers and layer sizes (the layer sizes were chosen somewhat arbitrarily, and upon calculating all the sizes below, I now realize that the filter sizes and layer sizes could have been chosen more appropriately, especially since there is a larger layer closer to the output. However, considering that I adjusted the dataset meticulously to make the model drive, I decided to keep the model):
+The final model architecture (model.py lines 55-65) consisted of a convolution neural network with the following layers and layer sizes (the layer sizes were chosen somewhat arbitrarily, and upon calculating all the sizes below, I now realize that the filter sizes and layer sizes could have been chosen more appropriately, especially since there is a larger layer closer to the output. However, considering that I adjusted the dataset meticulously to make the model drive, I decided to keep the model. Further improvements to this model would involve resizing the layers appropriately):
 
 | Layer         		|     Description	        					|
 |:---------------------:|:---------------------------------------------:|
